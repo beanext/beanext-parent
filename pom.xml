@@ -6,7 +6,7 @@
 	<groupId>org.beanext</groupId>
 	<artifactId>beanext-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>10</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>Beanext Framewrok Parent</name>
 	<inceptionYear>2015</inceptionYear>
 	<description>The Beanext Software Group provides agile java/jvm based scaffold and toolkits.</description>
@@ -38,12 +38,51 @@
 		<java.version>1.7</java.version>
 		<maven-scm-provider-gitexe.version>1.9.4</maven-scm-provider-gitexe.version>
 
+		<springframework.version>4.1.6.RELEASE</springframework.version>
+		<spring-security.version>4.0.1.RELEASE</spring-security.version>
+		<spring-data-jpa.version>1.8.0.RELEASE</spring-data-jpa.version>
+
+		<hibernate-ogm.version>4.2.0.CR1</hibernate-ogm.version>
+		<hibernate.version>4.3.10.Final</hibernate.version>
+		<hibernate-search.version>5.2.0.Final</hibernate-search.version>
+		<hibernate-validator.version>5.2.0.CR1</hibernate-validator.version>
+		<hibernate-commons.version>5.0.0.Final</hibernate-commons.version>
+		<hibernate-jpa-api.version>1.0.0.Final</hibernate-jpa-api.version>
+		
 		<slf4j.version>1.7.12</slf4j.version>
 		<logback.version>1.1.3</logback.version>
-		<servletapi.version>3.1.0</servletapi.version>
+		<log4jdbc.version>1.2</log4jdbc.version>
+
+		<ehcache.version>2.10.0</ehcache.version>
+
+		<freemarker.version>2.3.22</freemarker.version>
+
+		<commons-lang3.version>3.4</commons-lang3.version>
+		<commons-collections.version>3.2.1</commons-collections.version>
+		<commons-collections4.version>4.0</commons-collections4.version>
+		<commons-fileupload.version>1.3.1</commons-fileupload.version>
+
+		<guava.version>18.0</guava.version>
+		<querydsl.version>3.6.4</querydsl.version>
+
+		<fastjson.version>1.2.6</fastjson.version>
+		<jackson.version>2.6.0-rc1</jackson.version>
+		<jxls.version>1.0.6</jxls.version>
+		<poi.version>3.12</poi.version>
+		
+		<quartz.version>2.2.1</quartz.version>
+		
+		<servlet-api.version>3.1.0</servlet-api.version>
+		<jta.version>1.1</jta.version>
+		<validation-api.version>1.1.0.Final</validation-api.version>
 		<testng.version>6.9.4</testng.version>
 		<junit.version>4.12</junit.version>
-		<mockito.version>2.0.8-beta</mockito.version>
+		<mockito.version>2.0.10-beta</mockito.version>
+
+		<!-- 
+		<assertj.version>1.6.0</assertj.version>
+		<selenium.version>2.41.0</selenium.version>
+		 -->
 		<h2.version>1.4.187</h2.version>
 	</properties>
 
@@ -57,6 +96,19 @@
 			</roles>
 		</developer>
 	</developers>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>renruihr-snapshots</id>
+			<name>RenruiHR Snapshot Repository</name>
+			<url>http://repo.renruihr.com:8080/content/repositories/snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>renruihr-releases</id> 
+			<name>Renrui Release Repository</name> 
+			<url>http://repo.renruihr.com:8080/content/repositories/releases/</url> 
+		</repository>
+	</distributionManagement>
 
 	<!--
 	<distributionManagement>
@@ -75,15 +127,216 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- javax -->
+			<!-- spring -->
 			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>javax.servlet-api</artifactId>
-				<version>${servletapi.version}</version>
-				<scope>provided</scope>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-framework-bom</artifactId>
+				<version>${springframework.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-bom</artifactId>
+				<version>${spring-security.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-jpa</artifactId>
+				<version>${spring-data-jpa.version}</version>
 			</dependency>
 
-			<!-- log -->
+			<!-- hibernate -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-ehcache</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate-validator.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate.common</groupId>
+				<artifactId>hibernate-commons-annotations</artifactId>
+				<version>${hibernate-commons.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate.ogm</groupId>
+				<artifactId>hibernate-ogm-bom</artifactId>
+				<version>${hibernate-ogm.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate.javax.persistence</groupId>
+				<artifactId>hibernate-jpa-2.1-api</artifactId>
+				<version>${hibernate-jpa-api.version}</version>
+			</dependency>
+
+			<!-- freemarker -->
+			<dependency>
+				<groupId>org.freemarker</groupId>
+				<artifactId>freemarker</artifactId>
+				<version>${freemarker.version}</version>
+			</dependency>
+
+			<!-- ehcache -->
+			<dependency>
+				<groupId>net.sf.ehcache</groupId>
+				<artifactId>ehcache-core</artifactId>
+				<version>${ehcache.version}</version>
+			</dependency>
+
+			<!-- JSON -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.module</groupId>
+				<artifactId>jackson-module-jaxb-annotations</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.alibaba</groupId>
+			    <artifactId>fastjson</artifactId>
+			    <version>${fastjson.version}</version>
+			</dependency>
+
+			<!-- commons -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+			    	<version>${commons-lang3.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-collections4</artifactId>
+			    <version>${commons-collections4.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>commons-collections</groupId>
+			    <artifactId>commons-collections</artifactId>
+			    <version>${commons-collections.version}</version>
+			</dependency>
+
+			<dependency>
+			    <groupId>commons-fileupload</groupId>
+			    <artifactId>commons-fileupload</artifactId>
+			    <version>${commons-fileupload.version}</version>
+			</dependency>
+
+			<!-- guava -->
+			<dependency>
+			    <groupId>com.google.guava</groupId>
+			    <artifactId>guava</artifactId>
+			    <version>${guava.version}</version>
+			</dependency>
+
+			<!-- querydsl -->
+			<dependency>
+			  <groupId>com.mysema.querydsl</groupId>
+			  <artifactId>querydsl-apt</artifactId>
+			  <version>${querydsl.version}</version>
+			  <scope>provided</scope>
+			</dependency>    
+		
+			<dependency>
+			  <groupId>com.mysema.querydsl</groupId>
+			  <artifactId>querydsl-jpa</artifactId>
+			  <version>${querydsl.version}</version>
+			</dependency>
+			<dependency>
+			  <groupId>com.mysema.querydsl</groupId>
+			  <artifactId>querydsl-sql</artifactId>
+			  <version>${querydsl.version}</version>
+			</dependency>
+		
+			<dependency>
+			  <groupId>com.mysema.querydsl</groupId>
+			  <artifactId>querydsl-mongodb</artifactId>
+			  <version>${querydsl.version}</version>
+			</dependency>
+
+			<dependency>
+			  <groupId>com.mysema.querydsl</groupId>
+			  <artifactId>querydsl-collections</artifactId>
+			  <version>${querydsl.version}</version>
+			</dependency>
+
+			<!-- excel -->
+			<dependency>
+				<groupId>net.sf.jxls</groupId>
+				<artifactId>jxls-core</artifactId>
+				<version>${jxls.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${poi.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-scratchpad</artifactId>
+				<version>${poi.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>${poi.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml-schemas</artifactId>
+				<version>${poi.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>org.quartz-scheduler</groupId>
+				<artifactId>quartz</artifactId>
+				<version>${quartz.version}</version>
+			</dependency>
+			
+			<!-- Logging -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
@@ -102,7 +355,62 @@
 				<scope>test</scope>
 			</dependency>
 
+			<!--
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jul-to-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.googlecode.log4jdbc</groupId>
+				<artifactId>log4jdbc</artifactId>
+				<version>${log4jdbc.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			 -->
+
+			<!-- java -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${servlet-api.version}</version>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>javax.transaction</groupId>
+				<artifactId>jta</artifactId>
+				<version>${jta.version}</version>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>${validation-api.version}</version>
+				<optional>true</optional>
+			</dependency>
+			
+
 			<!-- test -->
+			<dependency>
+				<groupId>org.testng</groupId>
+				<artifactId>testng</artifactId>
+				<version>${testng.version}</version>
+				<scope>compile</scope>
+				<optional>true</optional>
+			</dependency>
 			<dependency>
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-core</artifactId>
@@ -127,7 +435,16 @@
 				<groupId>com.h2database</groupId>
 				<artifactId>h2</artifactId>
 				<version>${h2.version}</version>
+				<optional>true</optional>
 			</dependency>
+			<!--
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>tomcat-jdbc</artifactId>
+				<version>${tomcat-jdbc.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			-->
 
 			<!--osgi
 			<dependency>
@@ -257,6 +574,7 @@
 					<projectNameTemplate>[artifactId]</projectNameTemplate>
 				</configuration>
 			</plugin>
+			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -266,7 +584,6 @@
 					</archive>
 				</configuration>
 			</plugin>
-			<!--
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
